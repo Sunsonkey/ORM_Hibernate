@@ -12,24 +12,24 @@ import jakarta.persistence.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "PERSONS")
+@Table(name = "persons")
 @IdClass(PersonId.class)
 public class Person {
     @Id
-    @Column(name = "name", nullable = false)
+    @Column(name = "name", nullable = false, length = 50)
     private String name;
 
     @Id
-    @Column(name = "surname", nullable = false)
+    @Column(name = "surname", nullable = false, length = 50)
     private String surname;
 
     @Id
     @Column(name = "age", nullable = false)
     private int age;
 
-    @Column(name = "phone_number")
+    @Column(name = "phone_number", length = 20)
     private String phoneNumber;
 
-    @Column(name = "city_of_living")
+    @Column(name = "city_of_living", length = 50)
     private String cityOfLiving;
 }

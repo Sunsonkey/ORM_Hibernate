@@ -1,28 +1,50 @@
 package ru.netology.orm_hibernate.controller;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import ru.netology.orm_hibernate.entity.Person;
-import ru.netology.orm_hibernate.repository.PersonRepository;
+import ru.netology.orm_hibernate.service.PersonService;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
+@RequestMapping("/persons")
 public class PersonController {
-    private final PersonRepository personRepository;
+    private final PersonService service;
 
-    public PersonController(PersonRepository personRepository) {
-        this.personRepository = personRepository;
+    public PersonController(PersonService service) {
+        this.service = service;
     }
 
-    @GetMapping("/persons/by-city")
-    public List<Person> getPersonsByCity(@RequestParam("city") String city) {
-        return personRepository.getPersonsByCity(city);
+    @GetMapping("/by-city")
+    public List<Person> getPersonsByCity(@RequestParam String city) {
+        return service.getPersonsByCity(city);
     }
 
-    @GetMapping("/persons/age-greater-than")
-    public List<Person> getPersonsAgeGreaterThan(@RequestParam("age") int age) {
-        return personRepository.getPersonsByAgeGreaterThanOrderByAgeDesc(age);
+    @GetMapping("/by-age-less-than")
+    public List<Person> getPersonsByAgeLessThan(@RequestParam int age) {
+        return service.getPersonsByAgeLessThan(age);
+    }
+
+    @GetMapping("/by-name-surname")
+    public Optional<Person> getPersonByNameAndSurname(
+            @RequestParam String name,
+            @RequestParam String surname) {
+        return service.getPersonByNameAndSurname(name, surname);
+    }
+
+    @PostMapping
+    public Person savePerson(@RequestBody Person person) {
+        return service.savePerson(person);
+    }
+
+    @DeleteMapping("/{id}")
+    public void deletePerson(@PathVariable Long id) {
+        service.deletePerson(id);
+    }
+
+    @GetMapping("/{id}")
+    public Optional<Person> getPersonById(@PathVariable Long id) {
+        return service.getPersonById(id);
     }
 }

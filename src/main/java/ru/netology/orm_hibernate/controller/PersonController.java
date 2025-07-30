@@ -22,8 +22,8 @@ public class PersonController {
     }
 
     @GetMapping("/by-age-less-than")
-    public List<Person> getPersonsByAgeLessThan(@RequestParam int age) {
-        return service.getPersonsByAgeLessThan(age);
+    public List<Person> getPersonsYoungerThan(@RequestParam int age) {
+        return service.getPersonsYoungerThan(age);
     }
 
     @GetMapping("/by-name-surname")

@@ -16,15 +16,15 @@ public class PersonService {
     }
 
     public List<Person> getPersonsByCity(String city) {
-        return repository.findByCityOfLiving(city);
+        return repository.findByCity(city);
     }
 
-    public List<Person> getPersonsByAgeLessThan(int age) {
-        return repository.findByAgeLessThanOrderByAgeAsc(age);
+    public List<Person> getPersonsYoungerThan(int age) {
+        return repository.findPersonsYoungerThan(age);
     }
 
     public Optional<Person> getPersonByNameAndSurname(String name, String surname) {
-        return repository.findByNameAndSurname(name, surname);
+        return repository.findPersonByNameAndSurname(name, surname);
     }
 
     public Person savePerson(Person person) {
